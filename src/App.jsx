@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h1 className='text-3xl'>Wheres Waldo</h1>
+      {/* <h1 className='text-3xl'>Wheres Waldo</h1> */}
 
       <Game />
     </>

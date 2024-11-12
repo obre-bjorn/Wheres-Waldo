@@ -10,6 +10,8 @@ const CharDropdown = ({characters, xPercentage, yPercentage , onCharacterFound})
         characters.forEach(character => {
             const { x, y } = character.pos;
             
+            console.log(x, xPercentage)
+            console.log(y, yPercentage)
             // Check if click falls within tolerance range
             if (
                 xPercentage >= x - tolerance && xPercentage <= x + tolerance &&

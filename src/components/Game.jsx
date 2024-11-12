@@ -7,9 +7,9 @@ import Timer from "./Timer"
 import bleachCharacters from "../assets/bleach.jpg"
 
 const charactersToBeFound = [ 
-                                {name: "Toshiro", pos:{x : 59, y: 94}, found: false}, 
-                                {name: "Kenpachi",pos: {x: 39, y: 65},found: false},
-                                {name: "Ikkaku",pos:{x: 8, y: 81},found: false}
+                                {name: "Toshiro", pos:{x : 59, y: 80}, found: false}, 
+                                {name: "Kenpachi",pos: {x: 39, y: 52},found: false},
+                                {name: "Ikkaku",pos:{x: 8, y: 69},found: false}
                             ]
 
 const Game = () => {
@@ -30,20 +30,22 @@ const Game = () => {
         // Get the click coordinates relative to the viewport
         const { pageX, pageY } = e
 
-        let x
-        let y
+        
         
         // Get the container's position and dimensions
     
         const container = e.currentTarget.getBoundingClientRect()
 
-        console.log('ContainerX: ', container)
+
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+        console.log('Container: ', container)
 
 
         
         // Calculate position relative to the image
-        const selectedX = pageX - window.scrollX
-        const selectedY = pageY - window.scrollY
+        const selectedX = pageX - container.left
+        const selectedY = pageY - container.top - scrollY;
         
         let xPercentage = (selectedX/container.width) * 100
         let yPercentage = (selectedY/container.height) * 100
@@ -58,6 +60,9 @@ const Game = () => {
         console.log("X: ",selectedX)
         console.log("Y: ",selectedY)
 
+
+        let x
+        let y
         if((selectedY < 100 && selectedX < 30) || selectedY < 100){
 
             y = selectedY + 200
@@ -73,7 +78,7 @@ const Game = () => {
         
         setDropdownPosition({ x, y })
         setDropdownVisible(true)
-        setMarkers((prev) => [...prev,{x: selectedX,y: selectedY}])
+        setMarkers((prev) => [...prev,{x: selectedX, y: selectedY}])
     }
 
     function handleCharacterFound(characterName) {
@@ -98,14 +103,14 @@ const Game = () => {
     }, [])
 
     return (
-        <div className="game-container relative w-full min-h-screen">
+        <div className="game-container relative mx-auto w-full" >
 
             <Timer gameOver={gameOver}/>
 
 
-            <div className="relative">
+            <div className="relative w-full ">
                 <img 
-                    className="w-full h-auto " 
+                    className="w-full h-full " 
                     src={bleachCharacters}
                     alt="bleach characters" 
                     onClick={handleImageClick}
