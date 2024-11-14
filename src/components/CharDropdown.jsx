@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 
 
-const CharDropdown = ({characters, xPercentage, yPercentage , onCharacterFound}) => {
+const CharDropdown = ({characters, xPercentage, yPercentage , onCharacterFound, showDropdown}) => {
 
     const handleCharacterClick = (charName) => {
 
         const tolerance = 5;
+
+        showDropdown(false)
 
         characters.forEach(character => {
             const { x, y } = character.pos;

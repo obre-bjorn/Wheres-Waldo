@@ -4,12 +4,16 @@ import { useEffect, useState } from "react"
 import CharDropdown from "./CharDropdown"
 import Marker from "./Marker"
 import Timer from "./Timer"
+
+//images
 import bleachCharacters from "../assets/bleach.jpg"
+import narutoCharacters from "../assets/naruto-shipu.jpg"
+
 
 const charactersToBeFound = [ 
-                                {name: "Toshiro", pos:{x : 59, y: 80}, found: false}, 
-                                {name: "Kenpachi",pos: {x: 39, y: 52},found: false},
-                                {name: "Ikkaku",pos:{x: 8, y: 69},found: false}
+                                {name: "Sasori", pos:{x : 23, y: 49}, found: false}, 
+                                {name: "Jiraiya",pos: {x: 57, y: 13},found: false},
+                                {name: "Zabuza",pos:{x: 68, y: 52},found: false}
                             ]
 
 const Game = () => {
@@ -87,7 +91,7 @@ const Game = () => {
                 char.name === characterName ? { ...char, found: true } : char
             )
         );
-        setMarkers(prev => [...prev, selectedPos]);
+        // setMarkers(prev => [...prev, selectedPos]);
     }
 
     // Close dropdown when clicking outside
@@ -111,7 +115,7 @@ const Game = () => {
             <div className="relative w-full ">
                 <img 
                     className="w-full h-full " 
-                    src={bleachCharacters}
+                    src="https://www.dropbox.com/scl/fi/3q9r8tvytwzrnb3niqzki/naruto-shipu.jpg?rlkey=h48m9wakmjh1kmqq5u3yctg4n&st=m1d3kuid&raw=1"
                     alt="bleach characters" 
                     onClick={handleImageClick}
                 />
@@ -127,7 +131,7 @@ const Game = () => {
                             transform: 'translate(-50%, -100%)'
                         }}
                     >
-                    <CharDropdown characters={characters} xPercentage={selectedPos.x} yPercentage={selectedPos.y} onCharacterFound ={handleCharacterFound}/>
+                    <CharDropdown characters={characters} xPercentage={selectedPos.x} yPercentage={selectedPos.y} onCharacterFound ={handleCharacterFound} showDropdown = {setDropdownVisible}/>
                     </div>
                 )}
 
