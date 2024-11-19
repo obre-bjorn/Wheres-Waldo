@@ -1,20 +1,26 @@
 
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSession } from '../../contexts/sessionContext'
 
+
+import {fetchFromApi} from '../utils/api'
 import Modal from '../components/Modal'
+
 
 const HomePage = () => {
 
 
+    const navigate = useNavigate()
+    const {setSessionData} = useSession()
+    const [isOpen,setIsOpen] = useState(false)
+    const [charImages,setCharImages] = useState([])
+    
     useEffect( () => {
 
         const fetchImages  = async () => {
 
-            const response = await fetch('http://localhost:4005/game-images')
-
-            
-            const data =await response.json()
-
+            const data = await fetchFromApi('/game-images')
             setCharImages(data.images)
 
         }
@@ -24,13 +30,14 @@ const HomePage = () => {
 
     }, [])
 
-    const [isOpen,setIsOpen] = useState(false)
-    const [charImages,setCharImages] = useState([])
 
+    const handleGameStart = async (image) => {
 
-    const handleGameStart = async () => {
-
-
+        const data = await fetchFromApi('/start-game')
+        
+        setSessionData(data.sessionID)
+        
+        navigate(`/game/${image.id}`,{state : { image }})
 
     }
 
@@ -45,7 +52,7 @@ const HomePage = () => {
             {charImages.length > 0 && 
                 charImages.map(image => (  
 
-                    <button key={image.id} onclick={handleGameStart}>
+                    <button key={image.id} onClick={() => handleGameStart(image)}>
                         
                         <img  className="w-96" src={image.url} alt="" />
 
@@ -57,7 +64,7 @@ const HomePage = () => {
         </section>
 
 
-        <Modal>
+        <Modal isOpen={isOpen}>
 
 
         </Modal>

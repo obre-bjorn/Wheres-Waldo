@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import './index.css'
 import App from './App.jsx'
+import { SessionProvider } from '../contexts/sessionContext'
 import HomePage from './pages/HomePage.jsx'
 import GamePage from './pages/GamePage.jsx'
 
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
         element: <HomePage/>
       },
       {
-        path:'/game/:game',
+        path:'/game/:gameId',
         element: <GamePage/>
       }
     ]
@@ -28,6 +29,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+  <SessionProvider>
     <RouterProvider router={router}/>
+  </SessionProvider>
   </StrictMode>,
 )

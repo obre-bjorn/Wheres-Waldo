@@ -1,60 +1,41 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 
+import { fetchFromApi } from "../utils/api"
+import { useSession } from "../../contexts/sessionContext"
 
 import CharDropdown from "./CharDropdown"
 import Marker from "./Marker"
 import Timer from "./Timer"
 
-//images
 
-import bleachCharacters from "../assets/bleach.jpg"
-import narutoCharacters from "../assets/naruto-shipu.jpg"
+const Game = ({image, handleGameOver}) => {
 
-
-const charactersToBeFound = [ 
-                                {name: "Sasori", pos:{x : 23, y: 49}, found: false}, 
-                                {name: "Jiraiya",pos: {x: 57, y: 13},found: false},
-                                {name: "Zabuza",pos:{x: 68, y: 52},found: false}
-                            ]
-
-const Game = () => {
-    const [characters, setCharacters] = useState([])
+    const {session} = useSession()
     const [dropdownVisible, setDropdownVisible] = useState(false)
     const [dropdownPosition, setDropdownPosition] = useState({ x: 0, y: 0 })
-    const [markers, setMarkers] = useState([])
+    // const [markers, setMarkers] = useState([])
     const [selectedPos,setSelectedPos] = useState({x:null, y: null})
     const [gameOver, setGameOver] = useState(false)
+    const characters = image.characters
 
 
-    useEffect(() => {
-        setCharacters(charactersToBeFound)
-    }, [])
-
-    function handleImageClick(e) {
+    async function handleImageClick(e) {
         
         // Get the click coordinates relative to the viewport
         const { pageX, pageY } = e
 
-        
-        
         // Get the container's position and dimensions
     
         const container = e.currentTarget.getBoundingClientRect()
-
-
         const scrollY = window.scrollY || document.documentElement.scrollTop;
 
-        console.log('Container: ', container)
-
-
-        
         // Calculate position relative to the image
         const selectedX = pageX - container.left
         const selectedY = pageY - container.top - scrollY;
         
         let xPercentage = (selectedX/container.width) * 100
         let yPercentage = (selectedY/container.height) * 100
-
 
         setSelectedPos({x:xPercentage,y:yPercentage})
 
@@ -68,6 +49,7 @@ const Game = () => {
 
         let x
         let y
+
         if((selectedY < 100 && selectedX < 30) || selectedY < 100){
 
             y = selectedY + 200
@@ -83,7 +65,6 @@ const Game = () => {
         
         setDropdownPosition({ x, y })
         setDropdownVisible(true)
-        setMarkers((prev) => [...prev,{x: selectedX, y: selectedY}])
     }
 
     function handleCharacterFound(characterName) {
@@ -116,7 +97,7 @@ const Game = () => {
             <div className="relative w-full ">
                 <img 
                     className="w-full h-full " 
-                    src="https://www.dropbox.com/scl/fi/3q9r8tvytwzrnb3niqzki/naruto-shipu.jpg?rlkey=h48m9wakmjh1kmqq5u3yctg4n&st=m1d3kuid&raw=1"
+                    src={image.url}
                     alt="bleach characters" 
                     onClick={handleImageClick}
                 />
@@ -124,21 +105,20 @@ const Game = () => {
                 
                 
                 {dropdownVisible && (
-                    <div 
-                        className="fixed bg-white text-black border border-gray-300 rounded shadow-lg z-50 p-2"
+                    <div className="fixed bg-white text-black border border-gray-300 rounded shadow-lg z-50 p-2"
                         style={{ 
                             left: `${dropdownPosition.x}px`,
                             top: `${dropdownPosition.y}px`,
                             transform: 'translate(-50%, -100%)'
-                        }}
-                    >
-                    <CharDropdown characters={characters} xPercentage={selectedPos.x} yPercentage={selectedPos.y} onCharacterFound ={handleCharacterFound} showDropdown = {setDropdownVisible}/>
+                        }}>
+
+                        <CharDropdown imageId ={image.id} sessionId = {session} characters={characters} xPercentage={selectedPos.x} yPercentage={selectedPos.y} onCharacterFound ={handleCharacterFound} showDropdown = {setDropdownVisible}/>
                     </div>
                 )}
 
-                {
+                {/* {
                     markers.map((marker,index)=> <Marker key={index} position={marker}/>)
-                }
+                } */}
             </div>
         </div>
     )

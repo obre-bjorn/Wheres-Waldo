@@ -1,33 +1,23 @@
 /* eslint-disable react/prop-types */
+import { fetchFromApi } from "../utils/api";
 
+const CharDropdown = ({sessionId, imageId,characters, xPercentage, yPercentage,   showDropdown}) => {
 
-const CharDropdown = ({characters, xPercentage, yPercentage , onCharacterFound, showDropdown}) => {
+    const handleCharacterClick = async (charName) => {
 
-    const handleCharacterClick = (charName) => {
-
-        const tolerance = 5;
-
-        showDropdown(false)
-
-        characters.forEach(character => {
-            const { x, y } = character.pos;
-            
-            console.log(x, xPercentage)
-            console.log(y, yPercentage)
-            // Check if click falls within tolerance range
-            if (
-                xPercentage >= x - tolerance && xPercentage <= x + tolerance &&
-                yPercentage >= y - tolerance && yPercentage <= y + tolerance   && charName == character.name
-            ) {
-                console.log(`${character.name} found!`);
-                onCharacterFound(character.name);
+        const data = await fetchFromApi('/validate-click', {
+            method: 'POST',
+            body: {
+                xPercentage : xPercentage,
+                yPercentage: yPercentage,
+                sessionID: sessionId,
+                imageId: imageId,
+                charName: charName
             }
-        });
+        })
 
+        console.log(data)
 
-
-
-        
     }                   
 
 

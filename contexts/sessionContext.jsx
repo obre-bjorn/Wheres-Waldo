@@ -32,11 +32,15 @@ export const SessionProvider = ({children}) => {
         localStorage.setItem('session', JSON.stringify(sessionData))
     }
 
+    const clearSession = () => {
+        setSession(null);
+        localStorage.removeItem('sessionId');
+    };
+
 
 
     return (
-        <SessionContext.Provider
-        value={{session, setSessionData}}>
+        <SessionContext.Provider value={{session, setSessionData,clearSession}}>
             {children}
         </SessionContext.Provider>
     )
