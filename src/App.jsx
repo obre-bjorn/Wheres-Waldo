@@ -1,15 +1,17 @@
-
-import Game from "./components/Game"
+import { Outlet } from "react-router-dom"
 
 function App() {
 
 
   return (
-    <>
-      {/* <h1 className='text-3xl'>Wheres Waldo</h1> */}
+    <div className=" min-h-screen bg-blue-950">
+      <nav className="">
+        Link
 
-      <Game />
-    </>
+      </nav>
+
+     <Outlet/>
+    </div>
   )
 }
 

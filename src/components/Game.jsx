@@ -6,6 +6,7 @@ import Marker from "./Marker"
 import Timer from "./Timer"
 
 //images
+
 import bleachCharacters from "../assets/bleach.jpg"
 import narutoCharacters from "../assets/naruto-shipu.jpg"
 

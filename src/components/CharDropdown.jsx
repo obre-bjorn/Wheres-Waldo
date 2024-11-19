@@ -28,7 +28,7 @@ const CharDropdown = ({characters, xPercentage, yPercentage , onCharacterFound, 
 
 
         
-    }
+    }                   
 
 
 
