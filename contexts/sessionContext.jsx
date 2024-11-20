@@ -33,14 +33,15 @@ export const SessionProvider = ({children}) => {
     }
 
     const clearSession = () => {
+        localStorage.removeItem('session');
+        sessionStorage.removeItem('foundCharacters')
         setSession(null);
-        localStorage.removeItem('sessionId');
     };
 
 
 
     return (
-        <SessionContext.Provider value={{session, setSessionData,clearSession}}>
+        <SessionContext.Provider value={{session, setSessionData, clearSession}}>
             {children}
         </SessionContext.Provider>
     )

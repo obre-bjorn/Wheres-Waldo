@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useParams, useLocation } from "react-router-dom"
+import { useParams, useLocation, useNavigate } from "react-router-dom"
 
 
 import Game from "../components/Game"
@@ -11,7 +11,7 @@ import Input from "../components/Input"
 
 const GamePage = () => {
 
-
+    const navigate = useNavigate()
     const {session,clearSession} = useSession()
     const {gameId} = useParams()
     const location = useLocation()
@@ -22,20 +22,25 @@ const GamePage = () => {
     console.log("Game ID: ", gameId)
 
 
-    const handleEndGame = async () => {
+    const handleEndGame = async (e) => {
+
+
+      e.preventDefault()
       
       setShowModal(false)
 
       const data = fetchFromApi('/end-game', {
-        body : JSON.stringify({
-          session,
-          name
-        })
+        method : 'POST',
+        body : {
+          sessionID : session,
+          name: name
+        }
       })
+
       console.log(data)
 
       clearSession()
-
+      navigate('/')
 
     }
 
@@ -56,7 +61,7 @@ const GamePage = () => {
 
         {gameOver && 
                     <Modal isOpen={showModal}>
-                            <form action="/" onSubmit={handleEndGame}>
+                            <form onSubmit={handleEndGame}>
                                 <Input/>
                                 <button type="submit">End Game</button>
                             </form>
