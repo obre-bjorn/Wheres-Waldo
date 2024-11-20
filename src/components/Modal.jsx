@@ -1,5 +1,8 @@
+/* eslint-disable react/prop-types */
 
 const  Modal= ({children, isOpen, onClose}) => {
+
+
 
     if(!isOpen) return null
 

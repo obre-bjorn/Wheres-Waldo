@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react"
 
-import { fetchFromApi } from "../utils/api"
-import { useSession } from "../../contexts/sessionContext"
 
+import { useSession } from "../../contexts/sessionContext"
 import CharDropdown from "./CharDropdown"
-import Marker from "./Marker"
-import Timer from "./Timer"
+// import Marker from "./Marker"
+// import Timer from "./Timer"
 
 
 const Game = ({image, handleGameOver}) => {
@@ -16,8 +15,21 @@ const Game = ({image, handleGameOver}) => {
     const [dropdownPosition, setDropdownPosition] = useState({ x: 0, y: 0 })
     // const [markers, setMarkers] = useState([])
     const [selectedPos,setSelectedPos] = useState({x:null, y: null})
-    const [gameOver, setGameOver] = useState(false)
+    const [foundCharacters, setFoundCharacters] = useState([])
     const characters = image.characters
+
+
+    useEffect(() => {
+
+    const storedCharacters = JSON.parse(sessionStorage.getItem('foundCharacters'));
+
+        if (storedCharacters) {
+
+            setFoundCharacters(storedCharacters);
+
+        }
+
+}, []);
 
 
     async function handleImageClick(e) {
@@ -67,12 +79,28 @@ const Game = ({image, handleGameOver}) => {
         setDropdownVisible(true)
     }
 
-    function handleCharacterFound(characterName) {
-        setCharacters(prevChars => 
-            prevChars.map(char => 
-                char.name === characterName ? { ...char, found: true } : char
-            )
-        );
+    function handleCharacterFound(characterName, gameOver) {
+
+        if(gameOver){
+
+            handleGameOver()
+
+            return
+
+        }
+
+
+        setFoundCharacters(prev => {
+
+            const updated = [...prev, characterName];
+            sessionStorage.setItem('foundCharacters', JSON.stringify(updated));
+
+        return updated;
+
+    });
+
+
+
         // setMarkers(prev => [...prev, selectedPos]);
     }
 
@@ -91,7 +119,7 @@ const Game = ({image, handleGameOver}) => {
     return (
         <div className="game-container relative mx-auto w-full" >
 
-            <Timer gameOver={gameOver}/>
+            {/* <Timer gameOver={gameOver}/> */}
 
 
             <div className="relative w-full ">
@@ -110,9 +138,20 @@ const Game = ({image, handleGameOver}) => {
                             left: `${dropdownPosition.x}px`,
                             top: `${dropdownPosition.y}px`,
                             transform: 'translate(-50%, -100%)'
-                        }}>
+                        }}
+                    >
 
-                        <CharDropdown imageId ={image.id} sessionId = {session} characters={characters} xPercentage={selectedPos.x} yPercentage={selectedPos.y} onCharacterFound ={handleCharacterFound} showDropdown = {setDropdownVisible}/>
+                        <CharDropdown 
+                            imageId ={image.id} 
+                            sessionId = {session} 
+                            characters={characters} 
+                            xPercentage={selectedPos.x} 
+                            yPercentage={selectedPos.y} 
+                            onCharacterFound ={handleCharacterFound} 
+                            showDropdown = {setDropdownVisible}
+                            foundCharacters = {foundCharacters}
+                        />
+
                     </div>
                 )}
 

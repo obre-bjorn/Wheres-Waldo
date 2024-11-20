@@ -6,7 +6,7 @@ import { useSession } from '../../contexts/sessionContext'
 
 import {fetchFromApi} from '../utils/api'
 import Modal from '../components/Modal'
-
+import HighScoreListing from '../components/HighScoreLising'
 
 const HomePage = () => {
 
@@ -15,6 +15,7 @@ const HomePage = () => {
     const {setSessionData} = useSession()
     const [isOpen,setIsOpen] = useState(false)
     const [charImages,setCharImages] = useState([])
+    const [highscores, setHighscores] = useState([])
     
     useEffect( () => {
 
@@ -25,7 +26,15 @@ const HomePage = () => {
 
         }
 
+        const fetchHighScores = async () => {
+
+            const data = await fetchFromApi('/highscores')
+            setHighscores(data.scores)
+
+        }
+
         fetchImages()
+        fetchHighScores
 
 
     }, [])
@@ -39,6 +48,12 @@ const HomePage = () => {
         
         navigate(`/game/${image.id}`,{state : { image }})
 
+    }
+
+    
+
+    const handleCloseHighScoreModal = () => {
+        setIsOpen(false)
     }
 
 
@@ -64,9 +79,9 @@ const HomePage = () => {
         </section>
 
 
-        <Modal isOpen={isOpen}>
+        <Modal isOpen={isOpen} onClose={handleCloseHighScoreModal}>
 
-
+            <HighScoreListing highscores={highscores}/>
         </Modal>
 
     </div>
