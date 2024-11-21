@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { toast,Bounce } from "react-toastify";
 import { fetchFromApi } from "../utils/api";
 
 const CharDropdown = (
@@ -31,6 +32,18 @@ const CharDropdown = (
 
             if(data.gameover){
 
+                toast.success(`${charName} Found!`,{
+                    position: "bottom-right",
+                    autoClose: 500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce,
+                })
+
                 onCharacterFound(charName, data.gameover)
 
                 return 
@@ -39,14 +52,37 @@ const CharDropdown = (
 
             if (data.success && (data.msg.includes('found'))) {
 
+                toast.success(`${charName} Found!`,{
+                    position: "bottom-right",
+                    autoClose: 500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    transition: Bounce,
+                })
+
                 onCharacterFound(charName); // Update foundCharacters in parent
 
-
+                return 
             }
 
 
-            
+            toast.error(`${charName} Not Found!`,{
+                position: "bottom-right",
+                autoClose: 500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Bounce,
+            })
 
+            return 
             
 
     }                   
@@ -75,7 +111,6 @@ const CharDropdown = (
 
         </ul>
     )
-
 
 
 }

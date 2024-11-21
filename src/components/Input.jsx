@@ -1,23 +1,22 @@
-import { useState } from "react"
+/* eslint-disable react/prop-types */
+const Input = ({setName,name}) => {
 
-
-const Input = () => {
-
-    const [name,setName] = useState('')
+    
 
 
     const handleNameChange = (e) => {
 
 
-      setName(e.target.value)
+        setName(e.target.value)
     }
-  return (
 
-    <label htmlFor="player"> Enter Your Name: 
-        <input id="player" type="text" name="playerName" value={name} onChange={handleNameChange}/>
-    </label>
+    return (
 
-  )
+        <label htmlFor="player"> Enter Your Name: 
+            <input id="player" type="text" name="playerName" value={name} onChange={handleNameChange}/>
+        </label>
+
+    )
 }
 
 export default Input

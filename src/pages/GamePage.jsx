@@ -13,11 +13,15 @@ const GamePage = () => {
 
     const navigate = useNavigate()
     const {session,clearSession} = useSession()
+    
     const {gameId} = useParams()
     const location = useLocation()
+    const {image} = location.state
+
     const [gameOver,setGameOver ]= useState(false)
     const [showModal, setShowModal] = useState(false)
-    const {image} = location.state
+    const [name,setName] = useState('')
+
 
     console.log("Game ID: ", gameId)
 
@@ -61,8 +65,8 @@ const GamePage = () => {
 
         {gameOver && 
                     <Modal isOpen={showModal}>
-                            <form onSubmit={handleEndGame}>
-                                <Input/>
+                            <form onSubmit={handleEndGame}  >
+                                <Input setName={setName} name={name}/>
                                 <button type="submit">End Game</button>
                             </form>
                     </Modal>
