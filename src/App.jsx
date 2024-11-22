@@ -36,11 +36,16 @@ function App() {
   }
 
 
+    const handleCloseHighScoreModal = () => {
+        setScoreModal(false)
+    }
+
+
   return (
-    <div className=" min-h-screen bg-blue-950">
+    <div className=" min-h-screen bg-blue-950 relative">
         <ToastContainer />
       
-      <nav className="container mx-auto flex items-center justify-between mb-40 text-2xl text-white py-5 sticky">
+      <nav className="container mx-auto flex items-center justify-between mb-10 text-2xl text-white py-5 px-10 sticky">
         
 
         <Link to={'/'} className="" >Where&apos;s Waldo </Link>
@@ -54,7 +59,7 @@ function App() {
       </nav>
 
 
-      <Modal isOpen={showScoreModal} onClose={handleBtnGetScores}>
+      <Modal isOpen={showScoreModal} onClose={handleCloseHighScoreModal}>
 
           <HighScoreListing highscores={highscores}/>
         

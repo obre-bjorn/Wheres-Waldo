@@ -124,7 +124,7 @@ const Game = ({image, handleGameOver}) => {
 
             <div className="relative w-full ">
                 <img 
-                    className="w-full h-full " 
+                    className="w-full h-full rounded-md" 
                     src={image.url}
                     alt="bleach characters" 
                     onClick={handleImageClick}

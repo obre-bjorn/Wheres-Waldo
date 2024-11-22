@@ -65,9 +65,10 @@ const GamePage = () => {
 
         {gameOver && 
                     <Modal isOpen={showModal}>
-                            <form onSubmit={handleEndGame}  >
-                                <Input setName={setName} name={name}/>
-                                <button type="submit">End Game</button>
+                            <h1 className="text-2xl text-blue-900">Ranking Form</h1>
+                            <form onSubmit={handleEndGame}  className="flex flex-col gap-4 mt-5">
+                                <Input setName={setName} name={name} />
+                                <button type="submit" className="bg-blue-900 text-white py-2 px-4 mt-5">End Game</button>
                             </form>
                     </Modal>
         }

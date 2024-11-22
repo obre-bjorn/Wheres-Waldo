@@ -90,13 +90,13 @@ const CharDropdown = (
 
 
     return (
-        <ul className="space-y-1">
+        <ul className="">
 
             {characters.map((char,index) => (
 
-                <li key={index} className="cursor-pointer hover:bg-gray-400 px-4 py-2 rounded">
+                <li key={index} className="cursor-pointer hover:bg-gray-400  rounded w-full mb-2">
                     
-                    <button className={`w-full ${foundCharacters.includes(char.name) ? 'bg-green-300' : ''}`} 
+                    <button className={`w-full px-4 py-2 ${foundCharacters.includes(char.name) ? 'bg-green-300' : ''}`} 
                             onClick= { () => {handleCharacterClick(char.name)}} 
                             disabled = {foundCharacters.includes(char.name)}
                     >
