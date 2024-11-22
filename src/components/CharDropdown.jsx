@@ -28,8 +28,6 @@ const CharDropdown = (
 
             showDropdown(false)
 
-            console.log(data)
-
             if(data.gameover){
 
                 toast.success(`${charName} Found!`,{

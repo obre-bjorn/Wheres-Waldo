@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useParams, useLocation, useNavigate } from "react-router-dom"
+import {  useLocation, useNavigate } from "react-router-dom"
 
 
 import Game from "../components/Game"
@@ -14,7 +14,7 @@ const GamePage = () => {
     const navigate = useNavigate()
     const {session,clearSession} = useSession()
     
-    const {gameId} = useParams()
+    
     const location = useLocation()
     const {image} = location.state
 
@@ -23,7 +23,6 @@ const GamePage = () => {
     const [name,setName] = useState('')
 
 
-    console.log("Game ID: ", gameId)
 
 
     const handleEndGame = async (e) => {

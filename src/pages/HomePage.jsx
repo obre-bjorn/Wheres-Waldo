@@ -12,15 +12,21 @@ const HomePage = () => {
 
     const navigate = useNavigate()
     const {setSessionData} = useSession()
+    const [loading, setLoading] = useState(null)
     const [charImages,setCharImages] = useState([])
 
     
     useEffect( () => {
 
+
+        setLoading(true)
+
         const fetchImages  = async () => {
 
             const data = await fetchFromApi('/game-images')
             setCharImages(data.images)
+
+            setLoading(false)
 
         }
 
@@ -49,21 +55,30 @@ const HomePage = () => {
 
     <div className='py-5'>
         <h1 className='mb-10 text-5xl font-bold text-center text-white'>Choose Any of the Images (Bleach || Naruto)</h1>
-        <section className='flex flex-wrap gap-20 mt-5 align-center justify-center'>
-
-            {charImages.length > 0 && 
-                charImages.map(image => (  
-
-                    <button className= "max-w-min min-w-96  rounded-md transition-all hover:scale-110" key={image.id} onClick={() => handleGameStart(image)}>
-                        
-                        <img className="w-full rounded-md" src={image.url} alt="" />
-
-                    </button>
-                ))
-            }
 
 
-        </section>
+        {
+            loading ? 
+            
+                <h1 className='text-center text-3xl text-white'>Loading Images...</h1>
+                :
+
+                <section className='flex flex-wrap gap-20 mt-5 align-center justify-center'>
+
+                    {charImages.length > 0 && 
+                        charImages.map(image => (  
+
+                            <button className= "max-w-min min-w-96  rounded-md transition-all hover:scale-110" key={image.id} onClick={() => handleGameStart(image)}>
+                                
+                                <img className="w-full rounded-md" src={image.url} alt="" />
+
+                            </button>
+                        ))
+                    }
+                </section>
+
+        }
+        
 
 
     </div>

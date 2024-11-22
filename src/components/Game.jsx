@@ -51,14 +51,6 @@ const Game = ({image, handleGameOver}) => {
 
         setSelectedPos({x:xPercentage,y:yPercentage})
 
-        console.log("X percentage: ", xPercentage)
-        console.log("Y Percentage: ", yPercentage)
-
-
-        console.log("X: ",selectedX)
-        console.log("Y: ",selectedY)
-
-
         let x
         let y
 

@@ -2,6 +2,9 @@
 
 
 const HighScoreListing = ({highscores}) => {
+
+
+    
     return (
         <div>
                        
