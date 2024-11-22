@@ -32,7 +32,7 @@ const GamePage = () => {
       
       setShowModal(false)
 
-      const data = fetchFromApi('/end-game', {
+      await fetchFromApi('/end-game', {
         method : 'POST',
         body : {
           sessionID : session,
@@ -40,7 +40,7 @@ const GamePage = () => {
         }
       })
 
-      console.log(data)
+      
 
       clearSession()
       navigate('/')
@@ -56,7 +56,7 @@ const GamePage = () => {
     }
     
     
-    console.log('GAMEPAGE.GameOver: ', gameOver )
+    
 
 
   return (
