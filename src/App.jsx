@@ -48,11 +48,11 @@ function App() {
       <nav className="container mx-auto flex items-center justify-between mb-10 text-2xl text-white py-5 px-10 sticky">
         
 
-        <Link to={'/'} className="" >Where&apos;s Waldo </Link>
+        <Link to={'/'} className="transition-all hover:scale-105 hover:text-orange-500" >Where&apos;s Waldo </Link>
 
 
 
-        <button onClick={handleBtnGetScores}>
+        <button className="transition-all hover:scale-105 hover:text-orange-500" onClick={handleBtnGetScores}>
           Highscores
         </button>
 

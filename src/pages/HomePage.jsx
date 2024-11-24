@@ -54,7 +54,7 @@ const HomePage = () => {
     return (
 
     <div className='py-5'>
-        <h1 className='mb-10 text-5xl font-bold text-center text-white'>Choose Any of the Images (Bleach || Naruto)</h1>
+        <h1 className='mb-20 text-5xl font-bold text-center text-white'>Choose Any of the Images (Bleach || Naruto)</h1>
 
 
         {

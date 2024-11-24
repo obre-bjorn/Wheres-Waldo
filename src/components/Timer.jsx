@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react'
 
+// eslint-disable-next-line react/prop-types
 const Timer = ({gameOver}) => {
 
 
@@ -34,7 +35,7 @@ const Timer = ({gameOver}) => {
 
   return (
     <>
-        <h1 className='text-3xl'>Time: {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}</h1>
+        <h1 className='text-3xl text-center text-white mb-5 font-bold'>Time: {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}</h1>
     </>
   )
 }

@@ -7,6 +7,7 @@ import Modal from "../components/Modal"
 import { useSession } from "../../contexts/sessionContext"
 import { fetchFromApi } from "../utils/api"
 import Input from "../components/Input"
+import Timer from "../components/Timer"
 
 
 const GamePage = () => {
@@ -72,6 +73,7 @@ const GamePage = () => {
                     </Modal>
         }
 
+        <Timer gameOver={gameOver} />
 
         <Game image={image} handleGameOver = {handleGameOver }/>
 
