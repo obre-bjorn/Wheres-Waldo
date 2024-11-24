@@ -1,12 +1,12 @@
 
-const API_BASE_URL = "http://localhost:4005";
+// const API_BASE_URL = "https://wheres-waldo-backend-8pec.onrender.com";
 
 
 export const fetchFromApi = async (endpoint, options = {}) => {
   try {
     const { body, ...restOptions } = options;
 
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}${endpoint}`, {
       headers: {
         'Content-Type': 'application/json',
         ...restOptions.headers, // Merge additional headers if provided

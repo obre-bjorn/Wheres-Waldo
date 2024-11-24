@@ -18,6 +18,7 @@ const Game = ({image, handleGameOver}) => {
     const [foundCharacters, setFoundCharacters] = useState([])
     const characters = image.characters
 
+   
 
     useEffect(() => {
 

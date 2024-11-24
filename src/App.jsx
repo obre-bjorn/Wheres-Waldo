@@ -16,6 +16,10 @@ function App() {
   const [showScoreModal,setScoreModal] = useState(false)
 
 
+
+
+  
+
   const fetchHighScores = async () => {
 
     const data = await fetchFromApi('/highscores')

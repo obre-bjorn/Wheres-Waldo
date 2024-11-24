@@ -14,6 +14,8 @@ const CharDropdown = (
     }) => {
 
         const handleCharacterClick = async (charName) => {
+            
+            showDropdown(false)
 
             const data = await fetchFromApi('/validate-click', {
                 method: 'POST',
@@ -26,7 +28,6 @@ const CharDropdown = (
                 }
             })
 
-            showDropdown(false)
 
             if(data.gameover){
 
